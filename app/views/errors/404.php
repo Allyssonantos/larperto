@@ -1,0 +1,1 @@
+<section class="container auth-page"><div class="form-card"><p class="eyebrow">404</p><h1>Página não encontrada</h1><p>O endereço acessado não existe.</p><a class="button" href="<?= Helper::e(Helper::url()) ?>">Voltar ao início</a></div></section>

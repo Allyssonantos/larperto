@@ -9,8 +9,8 @@ define('APP_PATH', ROOT_PATH . '/app');
 define('PUBLIC_PATH', ROOT_PATH . '/public');
 define('UPLOAD_PATH', PUBLIC_PATH . '/assets/uploads/imoveis');
 
-// URL base (ajuste conforme seu ambiente)
-define('BASE_URL', 'http://localhost/larperto/public');  // Altere se necessário
+// Caminho público relativo: funciona no localhost e também pelo IP da rede.
+define('BASE_URL', '/larperto/public');
 
 // Configurações do site
 define('SITE_NAME', 'LarPerto');
