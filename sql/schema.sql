@@ -250,4 +250,4 @@ INSERT INTO `configuracoes` (`chave`, `valor`) VALUES
 -- E-mail: admin@larperto.com.br
 -- Senha: admin123 (altere depois)
 INSERT INTO `usuarios` (`nome`, `email`, `telefone`, `senha`, `papel`, `status`) VALUES
-('Administrador', 'admin@larperto.com.br', '64999999999', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'admin', 'ativo');
+('Administrador', 'admin@larperto.com.br', '64999999999', '$2y$10$yfbuhm7DlLF9t25AT1j/JOO0q3dM1BuDolsYROHGsj2XQZEEymLBa', 'admin', 'ativo');

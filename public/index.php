@@ -130,7 +130,7 @@ if ($url === 'entrar' || $url === 'cadastrar') {
                 session_regenerate_id(true);
                 $_SESSION['user_id'] = $user['id'];
                 $_SESSION['user_role'] = $user['papel'];
-                Helper::redirect(Helper::url('minha-conta'));
+                Helper::redirect(Helper::url($user['papel'] === 'admin' ? 'admin' : 'minha-conta'));
             }
             Helper::setFlash('error', 'E-mail ou senha inválidos.');
         }
