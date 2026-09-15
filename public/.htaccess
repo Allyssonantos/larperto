@@ -1,5 +1,20 @@
 RewriteEngine On
 
+# Força HTTPS (descomente quando estiver em produção)
+# RewriteCond %{HTTPS} off
+# RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Remove index.php da URL
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^ index.php [QSA,L]
+RewriteRule ^(.*)$ index.php?url=$1 [QSA,L]
+
+# Segurança básica
+<FilesMatch "\.(htaccess|htpasswd|ini|log|sh|sql)$">
+    Require all denied
+</FilesMatch>
+
+# Protege a pasta de uploads de execução de scripts
+<IfModule mod_rewrite.c>
+    RewriteRule ^assets/uploads/.*\.(php|phtml|php3|php4|php5|pl|py|jsp|asp|html|htm|shtml|sh|cgi)$ - [F,L]
+</IfModule>
