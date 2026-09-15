@@ -69,8 +69,9 @@ function propertyFilters(PDO $db): array
         'maior-preco' => 'i.preco DESC',
         default => 'i.criado_em DESC',
     };
-    $sql = 'SELECT i.*, c.nome AS categoria, ci.nome AS cidade FROM imoveis i '
+    $sql = 'SELECT i.*, c.nome AS categoria, ci.nome AS cidade, img.arquivo AS imagem_principal FROM imoveis i '
         . 'JOIN categorias c ON c.id = i.categoria_id JOIN cidades ci ON ci.id = i.cidade_id '
+        . 'LEFT JOIN imovel_imagens img ON img.imovel_id = i.id AND img.principal = 1 '
         . 'WHERE ' . implode(' AND ', $where) . " ORDER BY $order LIMIT 30";
     $statement = $db->prepare($sql);
     $statement->execute($params);
@@ -78,7 +79,7 @@ function propertyFilters(PDO $db): array
 }
 
 if ($url === '' || $url === 'buscar') {
-    $statement = $db->query("SELECT i.*, c.nome AS categoria, ci.nome AS cidade FROM imoveis i JOIN categorias c ON c.id = i.categoria_id JOIN cidades ci ON ci.id = i.cidade_id WHERE i.status = 'publicado' ORDER BY i.criado_em DESC LIMIT 12");
+    $statement = $db->query("SELECT i.*, c.nome AS categoria, ci.nome AS cidade, img.arquivo AS imagem_principal FROM imoveis i JOIN categorias c ON c.id = i.categoria_id JOIN cidades ci ON ci.id = i.cidade_id LEFT JOIN imovel_imagens img ON img.imovel_id = i.id AND img.principal = 1 WHERE i.status = 'publicado' ORDER BY i.criado_em DESC LIMIT 12");
     $properties = $url === '' && $method === 'GET' && count($_GET) <= 1 ? $statement->fetchAll() : propertyFilters($db);
     $categories = $db->query('SELECT id, nome FROM categorias WHERE ativo = 1 ORDER BY ordem, nome')->fetchAll();
     $cities = $db->query('SELECT id, nome, estado FROM cidades WHERE ativo = 1 ORDER BY nome')->fetchAll();
